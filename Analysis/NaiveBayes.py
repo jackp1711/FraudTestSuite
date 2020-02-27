@@ -1,10 +1,11 @@
-from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import GaussianNB
 
 
-class LogisticReg:
+class NaiveBayes:
 
     X = []
     y = []
+
     model = None
 
     predictions = None
@@ -18,14 +19,14 @@ class LogisticReg:
     def __init__(self, x, y):
         self.X = x
         self.y = y
-
-        self.model = LogisticRegression(random_state=0)
         return
 
     def fit_model(self):
-        self.model.fit(self.X, self.y)
+        model = GaussianNB()
+        model.fit(X=self.X, y=self.y)
+        self.model = model
 
-        return self.model
+        return model
 
     def predict(self, test_data):
         self.predictions = self.model.predict(test_data)

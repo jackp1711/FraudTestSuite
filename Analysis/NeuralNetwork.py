@@ -1,10 +1,11 @@
-from sklearn.linear_model import LogisticRegression
+from sklearn.neural_network import MLPClassifier
 
 
-class LogisticReg:
+class NeuralNet:
 
     X = []
     y = []
+
     model = None
 
     predictions = None
@@ -18,11 +19,11 @@ class LogisticReg:
     def __init__(self, x, y):
         self.X = x
         self.y = y
-
-        self.model = LogisticRegression(random_state=0)
         return
 
     def fit_model(self):
+        self.model = MLPClassifier(hidden_layer_sizes=(5, 5, 5), max_iter=500, alpha=0.0001, solver='sgd',
+                                   random_state=21, tol=0.000000001)
         self.model.fit(self.X, self.y)
 
         return self.model
