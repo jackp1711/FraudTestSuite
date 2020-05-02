@@ -5,8 +5,8 @@ class File_writer:
 
     file_name = ""
 
-    def __init__(self):
-        self.file_name = "results2.txt"
+    def __init__(self, filename):
+        self.file_name = filename + '.txt'
 
         if not os.path.isfile(self.file_name):
             f = open(self.file_name, 'w')

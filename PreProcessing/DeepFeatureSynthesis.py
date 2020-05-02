@@ -5,13 +5,15 @@ import utils
 class PreProcessor:
 
     def __init__(self, data):
-        es = ft.EntitySet("datata")
+        es = ft.EntitySet("transactions")
 
-        feature_matrix, features = ft.dfs(target_entity='data_set', entityset=es, verbose=True)
+        es = es.entity_from_dataframe(entity_id='entities_transactions', dataframe=data, index='index_col')
 
-        fm_encoded, features_encoded = ft.encode_features(feature_matrix, features)
+        es.normalize_entity(base_entity_id='entities_transactions', new_entity_id='origin', index='type')
 
-        print("Number of features %s" % len(features_encoded))
-        fm_encoded.head(10)
+        fm, features = ft.dfs(entityset=es, target_entity='entities_transactions')
+
+        self.feature_matrix = fm
+        self.features = features
 
         return

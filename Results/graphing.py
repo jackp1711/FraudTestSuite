@@ -15,7 +15,7 @@ class Plot:
         self.post_results = post_results
         self.graph_labels = labels
 
-    def plot_bar_chart_comparison_acc_score(self):
+    def plot_bar_chart_comparison_acc_score(self, title):
         x = np.arange(len(self.graph_labels))
 
         width = 0.35
@@ -25,7 +25,7 @@ class Plot:
         # rects2 = self.graph.bar(x + width / 2, self.post_results, width, label='With feature engineering')
 
         self.graph.set_ylabel('Accuracy score')
-        self.graph.set_title('Comparison between accuracy scores')
+        self.graph.set_title(title)
         self.graph.set_xticks(x)
         self.graph.set_xticklabels(self.graph_labels)
         self.graph.legend()
@@ -36,18 +36,18 @@ class Plot:
         fig.tight_layout()
         plot.show()
 
-    def plot_bar_chart_comparison_false(self, correct_preds):
+    def plot_bar_chart_comparison_false(self, correct_preds, title):
         x = np.arange(len(self.graph_labels))
 
         width = 0.35
 
         fig, self.graph = plot.subplots()
-        rects1 = self.graph.bar(x - width/2, self.pre_results, width, label='False Positives')
-        rects2 = self.graph.bar(x + width/2, self.post_results, width, label='False Negatives')
+        rects1 = self.graph.bar(x - width/2, self.pre_results, width=width, label='False Positives')
+        rects2 = self.graph.bar(x + width/2, self.post_results, width=width, label='False Negatives')
         # rects3 = self.graph.bar(x + width*2, correct_preds, width, label='Correct predictions for fraud')
 
         self.graph.set_ylabel('Number of occurrences')
-        self.graph.set_title('Comparison between rate of false negatives and false positives to correct predictions of fraud')
+        self.graph.set_title(title)
         self.graph.set_xticks(x)
         self.graph.set_xticklabels(self.graph_labels)
         self.graph.legend()
@@ -56,7 +56,7 @@ class Plot:
         self.auto_label(rects2)
         # self.auto_label(rects3)
 
-        fig.tight_layout()
+        # fig.tight_layout()
         plot.show()
 
     def auto_label(self, reacts):
